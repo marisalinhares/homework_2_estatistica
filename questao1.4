@@ -1,0 +1,16 @@
+# Parâmetros
+M <- 582969
+n <- 50
+p <- 0.05 + (M %% 100) / 200   # p = 0,395
+
+prob_a <- pbinom(19, size = n, prob = p, lower.tail = FALSE)
+
+cat("(a) P(X >= 20) =", format(prob_a, digits = 6), "\n")
+
+prob_b <- pbinom(42, size = n, prob = p) - pbinom(30, size = n, prob = p)
+
+cat("(b) P(30 < X < 43) =", format(prob_b, digits = 6), "\n")
+
+prob_c <- dbinom(31, size = n, prob = p)
+
+cat("(c) P(X = 31) =", format(prob_c, digits = 6), "\n")
