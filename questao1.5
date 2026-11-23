@@ -1,0 +1,14 @@
+set.seed(123)            # fixa a semente
+
+p_teorico <- 0.395
+n <- 50
+
+# 1 = exigiu processamento adicional, 0 = não exigiu
+amostra <- rbinom(n, size = 1, prob = p_teorico)
+
+k <- sum(amostra)        
+p_chapeu <- k / n        
+
+cat("Número de requisições com processamento adicional (k):", k, "\n")
+cat("Estimativa de máxima verossimilhança (p chapéu):", p_chapeu, "\n")
+cat("Probabilidade teórica (p):", p_teorico, "\n")
