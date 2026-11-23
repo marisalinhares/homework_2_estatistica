@@ -1,0 +1,54 @@
+# parâmetros
+M <- 582969
+n <- 50
+p <- 0.05 + (M %% 100) / 200   # p = 0,395
+
+# valores de X
+x <- 0:n
+
+pmf <- dbinom(x, size = n, prob = p)
+cdf <- pbinom(x, size = n, prob = p)
+
+# gráficos lado a lado
+par(mfrow = c(1, 2), mar = c(5, 5, 4, 2))
+
+# PMF
+plot(
+  x, pmf,
+  type = "h",
+  lwd = 2,
+  col = "blue",
+  ylim = c(0, max(pmf) * 1.1),
+  main = "Função PMF",
+  xlab = "x (requisições com processamento adicional)",
+  ylab = expression(P(X == x))
+)
+points(x, pmf, pch = 16, col = "blue")
+
+# CDF
+plot(
+  NULL,
+  xlim = c(-1, 51),
+  ylim = c(0, 1),
+  main = "Função CDF",
+  xlab = "x (requisições com processamento adicional)",
+  ylab = expression(F(x) == P(X <= x))
+)
+
+# degrau antes de x = 0
+segments(-1, 0, 0, 0, lwd = 2, col = "red")
+
+# degraus entre os inteiros
+for (k in 0:(n - 1)) {
+  segments(k, cdf[k + 1], k + 1, cdf[k + 1], lwd = 2, col = "red")
+}
+
+# degrau final
+segments(n, 1, n + 1, 1, lwd = 2, col = "red")
+
+# bolinha cheia: início do degrau
+points(x, cdf, pch = 16, col = "red")
+
+# bolinha vazia: limite à esquerda 
+points(0, 0, pch = 1, col = "red")
+points(1:n, cdf[1:n], pch = 1, col = "red")
