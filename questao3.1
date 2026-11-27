@@ -1,0 +1,31 @@
+m <- 19.75
+media <- 62
+sigma <- 3.5
+n_T <- round(100 * m)
+
+#função para gerar valores normais padrão utilizando a transformação de box-muller:
+box_muller <- function(n) {     
+	 n_pares <- ceiling(n / 2)
+	
+# item (a): gerar variáveis uniformes independentes
+  U1 <- runif(n_pares, min = 0, max = 1)
+  U2 <- runif(n_pares, min = 0, max = 1)
+
+# item (b): transformação de Box-Muller
+  Z1 <- sqrt(-2 * log(U1)) * cos(2 * pi * U2)
+  Z2 <- sqrt(-2 * log(U1)) * sin(2 * pi * U2)
+
+  Z <- c(Z1, Z2)  #combina os valores em um único vetor
+  return(Z[1:n])  #descarta valores excedentes
+}
+
+# item (c): função para converter em temperaturas
+temperatura_bm <- function(n) {
+    Z <- box_muller(n)
+    T <- media + sigma * Z
+  return(T)
+}
+
+cat("Número de temperaturas:", n_T, "\n")
+cat("Número de pares:", ceiling(n_T / 2), "\n")
+
