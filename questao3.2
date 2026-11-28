@@ -1,0 +1,15 @@
+set.seed(2026)
+
+T_bm <- temperatura_bm(n_T) # temperaturas pelo método Box-Muller
+T_rnorm <- rnorm(n_T, mean = media, sd = sigma)  # temperaturas pelo gerador normal do R
+
+# verificar o tamanho dos conjuntos de dados
+cat("Número de temperaturas (Box-Muller):", length(T_bm), "\n")  # 1975
+cat("Número de temperaturas (rnorm):", length(T_rnorm), "\n")    # 1975
+
+# exibe as seis primeiras temperaturas de cada método
+cat("\nPrimeiras temperaturas - Box-Muller:\n")       #61.64078   59.62070   58.93394   57.35521   60.19956   61.41584
+print(head(T_bm))      
+
+cat("\nPrimeiras temperaturas - rnorm:\n")            #63.01225   57.53865   59.43319   62.21040   58.01597   61.42970
+print(head(T_rnorm))
